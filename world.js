@@ -345,7 +345,7 @@ function loop(now){requestAnimationFrame(loop);const dt=Math.min((now-last)/1000
  $('inputMethod').textContent=input.activeMethod==='controller'?'Controller':input.activeMethod==='touch'?'Touch controls':'Keyboard & mouse';if(nearest)$('interact').textContent=input.prompt('Interact')+' · '+nearest.label;
  $('place').textContent=state.location==='shop'?"Rene's pet shop":state.location==='home'?'Your home':state.location==='clinic'?"Rene's clinic":state.location==='daycare'?'Daycare Meadow':'Willowbrook';
  shopDogs.forEach((d,i)=>animateDog(d,false,clock+i));if(toastTime>0){toastTime-=dt;if(toastTime<=0)$('toast').classList.remove('visible');}
- followCamera.update(dt,player,roomCenters[state.location]!==undefined,clock);renderer.render(scene,camera);
+ followCamera.setSpeed(locomotionState.speed);followCamera.update(dt,player,roomCenters[state.location]!==undefined,clock);renderer.render(scene,camera);
 }
 $('parent').value=state.parent;$('parent').disabled=!!state.dog;
 $('start').textContent=state.dog?'Continue your journey':'Enter Willowbrook';

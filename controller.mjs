@@ -324,6 +324,7 @@ export class FollowCamera {
     this.focus = new THREE.Vector3();
     this.inspectObject = null;
     this.cinematic = false;
+    this.speed = 0;
   }
 
   addLook(look, dt) {
@@ -334,8 +335,13 @@ export class FollowCamera {
 
   zoom(delta) { this.distance = clamp(this.distance + delta, 2.7, 9.5); }
   inspect(object) { this.inspectObject = object || null; }
+  setSpeed(speed) { this.speed = Math.max(0, Number(speed) || 0); }
 
   update(dt, player, indoor, clock) {
+    const speedRatio = clamp(this.speed / 5.4, 0, 1);
+    const targetFov = 53 + speedRatio * 8;
+    this.camera.fov = damp(this.camera.fov, targetFov, 7, dt);
+    this.camera.updateProjectionMatrix();
     let targetFocus = player.position.clone().add(new THREE.Vector3(0, 1.28, 0));
     let targetDistance = indoor ? Math.min(this.distance, 4.2) : this.distance;
     let desired;
