@@ -1,0 +1,28 @@
+.input-method {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 3px 7px;
+  border: 1px solid #ffffff22;
+  border-radius: 999px;
+  background: #0e1a1db8;
+  color: #cbd8d5;
+  font-size: 10px;
+  letter-spacing: .5px;
+}
+
+#controlSettings input[type="range"] {
+  display: block;
+  width: 100%;
+  margin-top: 9px;
+  accent-color: #debf81;
+}
+
+#controlSettings .check {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+
+#controlSettings .check input { accent-color: #debf81; }
+
+#stats { pointer-events: none; }

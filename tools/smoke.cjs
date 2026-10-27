@@ -1,0 +1,23 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const fs=require('fs');
+const path=require('path');
+(async()=>{
+const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,args:['--enable-unsafe-swiftshader']});
+const page=await browser.newPage({viewport:{width:1440,height:900}});
+const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+await page.goto('file:///'+path.resolve(__dirname,'../play-3d.html').replaceAll('\\','/'));
+await page.locator('#start').click();await page.waitForTimeout(700);
+console.log('START',await page.evaluate(()=>BreedWorld.snapshot()));
+const yardStart=await page.evaluate(()=>BreedWorld.snapshot().yardDog);await page.waitForTimeout(2600);const yardEnd=await page.evaluate(()=>BreedWorld.snapshot().yardDog);
+assert(yardEnd.x>=yardEnd.bounds.minX&&yardEnd.x<=yardEnd.bounds.maxX&&yardEnd.z>=yardEnd.bounds.minZ&&yardEnd.z<=yardEnd.bounds.maxZ,'yard dog left fictional fenced yard');
+assert(Math.hypot(yardEnd.x-yardStart.x,yardEnd.z-yardStart.z)>.15,'yard dog did not roam');
+assert.equal(await page.evaluate(()=>BreedWorld.snapshot().environment.privateReferenceMediaShipped),false);
+console.log('YARD DOG',yardStart,'->',yardEnd);
+await page.screenshot({path:path.resolve(__dirname,'../qa-start.png')});
+await page.keyboard.down('w');await page.waitForTimeout(1000);await page.keyboard.up('w');
+console.log('WALK',await page.evaluate(()=>BreedWorld.snapshot().player));
+await page.locator('#camera').click();await page.locator('#camera').click();await page.waitForTimeout(300);
+console.log('CAMERA',await page.evaluate(()=>BreedWorld.snapshot().camera));
+console.log('ERRORS',errors);await browser.close();if(errors.length)process.exitCode=1;
+})();

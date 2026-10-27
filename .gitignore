@@ -1,0 +1,11 @@
+# Local/generated files
+node_modules/
+.playwright/
+.cache/
+
+# Private likeness/reference source; never ship or commit it.
+tools/unused-human-reference.glb
+
+# Browser and OS noise
+.DS_Store
+Thumbs.db

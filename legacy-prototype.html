@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Breed &amp; Beyond — Competition Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">BREED &amp; BEYOND</p>
+        <h1>Open-World Dog Life</h1>
+        <p class="lede">Raise a real dog from puppyhood, build trust and skills, explore the city, and enter the right competitions.</p>
+      </div>
+      <div class="wallet"><span>Virtual coins</span><strong id="coins">250</strong></div>
+    </header>
+
+    <section class="notice"><strong>Fair-play rules:</strong> dogs are matched by event, size, age, fitness, and skill. All events are non-contact, positive-reinforcement competitions.</section>
+
+    <section class="panel people-panel">
+      <div class="panel-heading"><div><p class="eyebrow">PUPPY HOME &amp; CARE TEAM</p><h2>Choose the people in your dog’s life</h2></div><span class="badge" id="parentCount">Choose 1–2</span></div>
+      <p class="people-intro">Choose one or two pet parents. Their strengths shape the home routine, while Rene is the master breeder, veterinary specialist, and trainer available throughout the dog’s life.</p>
+      <div class="people-layout">
+        <div><p class="eyebrow small-label">PET PARENTS</p><div id="parentChoices" class="people-grid"></div></div>
+        <article class="rene-card"><div class="rene-mark">R</div><div><p class="eyebrow small-label">MASTER CARE PROFESSIONAL</p><h3>Rene</h3><p>Master breeder · veterinary care · positive-reinforcement trainer</p><p class="rene-note">Rene helps you choose a healthy match, understand breed needs, check injuries, plan nutrition, and build safe skills.</p></div></article>
+      </div>
+      <p class="people-result" id="peopleResult" aria-live="polite">Choose a pet parent to begin your household.</p>
+      <div class="setup-summary" id="setupSummary" aria-live="polite"><strong>Starting home summary</strong><span>Choose a parent to preview your puppy's starting strengths.</span></div>
+      <div class="rene-services" id="reneServices"><p class="eyebrow small-label">RENE'S SAFE START SERVICES</p><button class="rene-service" data-service="health">Health check</button><button class="rene-service" data-service="nutrition">Nutrition plan</button><button class="rene-service" data-service="training">Positive training plan</button><p class="rene-result" id="reneResult" aria-live="polite">Choose a service for a useful first-day plan.</p></div>
+    </section>
+
+    <section class="panel setup-panel" id="setupPanel">
+      <div class="panel-heading"><div><p class="eyebrow">PET SHOP SETUP</p><h2>Choose your puppy</h2></div><span class="badge" id="setupBadge">Step 1 of 2</span></div>
+      <p class="setup-intro">Rene has prepared three healthy starter matches. Choose the puppy and breed that feel right for your home; every dog can learn and grow with patient care.</p>
+      <div class="puppy-grid" id="puppyChoices"></div>
+      <div class="walk-home" id="walkHomeCard" hidden>
+        <div class="walk-route"><span class="walk-house">HOME</span><span class="walk-line"><i id="walkProgress"></i></span><span class="walk-paw">PAW</span></div>
+        <p id="walkHomeText" aria-live="polite">Your new puppy is ready for the walk home.</p>
+      </div>
+      <button class="primary" id="beginWalk" disabled>Choose a puppy to begin</button>
+      <p class="setup-result" id="setupResult" aria-live="polite">Select at least one pet parent, then choose a puppy.</p>
+    </section>
+
+    <section class="panel life-panel">
+      <div class="panel-heading"><div><p class="eyebrow">YOUR DOG'S LIFE</p><h2>Raise and train your puppy</h2></div><span class="badge" id="lifeStage">Puppy</span></div>
+      <div class="home-routine" id="homeRoutine" aria-live="polite">
+        <div class="routine-heading"><div><p class="eyebrow small-label">FIRST DAY HOME</p><strong>Settle in before the big world opens</strong></div><span class="badge" id="routineBadge">Home not reached</span></div>
+        <p id="routinePrompt">Choose a pet parent, pick a puppy, and walk home to begin your first routine.</p>
+        <div class="routine-tasks" id="routineTasks"></div>
+      </div>
+      <div class="life-layout">
+        <div class="life-scene"><div class="life-yard"></div><div class="life-dog" id="lifeDog">🐕</div><div class="life-action" id="lifeAction">Waiting for care</div></div>
+        <div class="life-controls"><div class="life-heading"><strong id="lifeDogName">Coco</strong><span id="lifeDay">Day 1</span></div><p id="lifeDescription">Start with gentle routines. Your choices shape your dog's health, bond, and future skills.</p><div class="life-stats" id="lifeStats"></div><div class="life-actions"><button class="life-button" data-action="feed">🥣 Feed</button><button class="life-button" data-action="train">🎓 Train</button><button class="life-button" data-action="play">🧸 Play</button><button class="life-button" data-action="rest">🛏 Rest</button><button class="life-button" data-action="care">🩺 Care check</button></div><button class="primary" id="nextDay">End day and continue</button><p class="life-result" id="lifeResult" aria-live="polite"></p></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel roster-panel">
+        <div class="panel-heading"><div><p class="eyebrow">YOUR TEAM</p><h2>Choose a competitor</h2></div><span class="badge" id="teamCount">3 dogs</span></div>
+        <div id="roster" class="roster"></div>
+      </article>
+
+      <article class="panel event-panel">
+        <div class="panel-heading"><div><p class="eyebrow">EVENTS</p><h2>Find a fair match</h2></div><span class="badge" id="tier">Novice</span></div>
+        <div id="events" class="events"></div>
+        <div class="match-card" id="matchCard" aria-live="polite"><p>Select a dog and an event to see the matchup.</p></div>
+        <button class="primary" id="enterButton" disabled>Enter event</button>
+      </article>
+    </section>
+
+    <section class="panel result-panel" id="resultPanel" hidden>
+      <div class="panel-heading"><div><p class="eyebrow">RESULT</p><h2 id="resultTitle">Competition complete</h2></div><span class="ribbon">RIBBON</span></div>
+      <p id="resultText"></p><button class="secondary" id="againButton">Choose another event</button>
+    </section>
+
+    <section class="panel world-panel" id="worldPanel">
+      <div class="panel-heading"><div><p class="eyebrow">NEIGHBORHOOD MODE</p><h2>Walk the dog through town</h2></div><span class="badge" id="worldLocation">Home</span></div>
+      <p class="world-intro">Choose a destination, travel there, and interact with the place. New locations unlock as your puppy settles into the home routine.</p>
+      <div class="world-layout">
+        <div class="neighborhood" id="neighborhood" aria-label="Interactive neighborhood map">
+          <button class="world-location home active" data-world="home"><span>HOME</span><small>Rest &amp; daily care</small></button>
+          <button class="world-location shop" data-world="shop"><span>PET SHOP</span><small>Breeds &amp; supplies</small></button>
+          <button class="world-location clinic" data-world="clinic"><span>RENE'S CLINIC</span><small>Health &amp; nutrition</small></button>
+          <button class="world-location daycare" data-world="daycare"><span>DAYCARE</span><small>Play &amp; socialization</small></button>
+          <button class="world-location training" data-world="training"><span>TRAINING FIELD</span><small>Skills &amp; scent work</small></button>
+          <button class="world-location park" data-world="park"><span>COMPETITION PARK</span><small>Enter safe events</small></button>
+          <i class="route route-a"></i><i class="route route-b"></i><i class="route route-c"></i>
+          <div class="world-player" id="worldPlayer" aria-label="You and your dog"><span class="player-marker">YOU</span><img id="worldDog" src="assets/coco.jpg" alt="Coco walking with you"><span class="walk-ring"></span></div>
+          <div class="world-prompt" id="worldPrompt">Walk with WASD or the arrow keys. Reach a location to interact.</div>
+        </div>
+        <div class="world-card" id="worldCard" aria-live="polite"><p class="eyebrow" id="worldEyebrow">CURRENT LOCATION</p><h3 id="worldTitle">Home</h3><p id="worldDescription">Your puppy is safe at home. Complete care, then choose where to go.</p><div class="world-actions" id="worldActions"></div></div>
+      </div>
+      <p class="travel-status" id="travelStatus" aria-live="polite">You are at Home.</p>
+      <div class="walk-controls" aria-label="Walking controls"><button data-walk="up">▲</button><button data-walk="left">◀</button><button data-walk="down">▼</button><button data-walk="right">▶</button></div>
+    </section>
+    <footer>Prototype 02 · Neighborhood and puppy-life foundation · Educational care content is not veterinary advice.</footer>
+  <section class="panel map-panel"><div class="panel-heading"><div><p class="eyebrow">WORLD MAP</p><h2>Competition destinations</h2></div><span class="badge">Travel safely</span></div><div class="map-grid"><button class="location active" data-location="Arena Grounds">Arena Grounds</button><button class="location" data-location="Scent Village">Scent Village</button><button class="location" data-location="Care Center">Care Center</button><button class="location" data-location="Daycare Meadow">Daycare Meadow</button></div><p class="map-status" id="mapStatus">You are at Arena Grounds. Visit Scent Village for Coco's special trial.</p></section><section class="panel scent-panel" id="scentPanel" hidden><div class="panel-heading"><div><p class="eyebrow">COCO'S SPECIAL TRIAL</p><h2>Find the hidden article</h2></div><span class="badge">Scent Search</span></div><p class="scent-instruction">A safe training article is hidden among three choices. Coco uses focus, not speed.</p><div class="search-options" id="searchOptions"></div><p class="search-result" id="searchResult" aria-live="polite"></p></section>
+  <section class="panel mission-panel"><div class="panel-heading"><div><p class="eyebrow">SEARCH CONDITIONS</p><h2>Plan the next mission</h2></div><span class="badge" id="missionBadge">Field briefing</span></div><div class="mission-grid"><div><label for="missionSelect">Mission type</label><select id="missionSelect"><option value="article">Clothing Article Trial</option><option value="treasure">Trail Treasure Hunt</option><option value="rescue">Lost-Pet Marker Search</option><option value="vehicle">Search Vehicle Bay</option></select></div><div><label for="weatherSelect">Weather</label><select id="weatherSelect"><option>Clear</option><option>Light rain</option><option>Windy</option><option>Warm</option></select></div><div><label for="terrainSelect">Terrain</label><select id="terrainSelect"><option>Training field</option><option>Woodland trail</option><option>Village rooms</option><option>Waterfront</option></select></div></div><div class="condition-readout" id="conditionReadout"></div><button class="secondary" id="briefingButton">Generate field briefing</button></section>
+  <section class="panel care-panel"><div class="panel-heading"><div><p class="eyebrow">DOG READINESS</p><h2>Before you compete</h2></div><span class="badge" id="saveStatus">Saved locally</span></div><div id="readiness" class="readiness"></div><p class="care-note">Rest, water, shade, and positive reinforcement are part of every event. This prototype is educational and is not veterinary advice.</p></section>
+  <section class="panel field-panel" id="fieldPanel"><div class="panel-heading"><div><p class="eyebrow">LIVE FIELD MISSION</p><h2 id="fieldTitle">Ready for briefing</h2></div><span class="badge" id="fieldScore">No run yet</span></div><p id="fieldPrompt">Generate a field briefing, then launch the mission to begin.</p><div class="field-scene" id="fieldScene" aria-live="polite"><div class="field-sky"></div><div class="field-ground"><div class="search-path" id="searchPath"></div><div class="field-dog" id="fieldDog">Coco</div><div class="target-marker" id="targetMarker">?</div><div class="field-zone zone-one" id="zoneOne">Start</div><div class="field-zone zone-two" id="zoneTwo">Trail</div><div class="field-zone zone-three" id="zoneThree">Find</div></div><div class="field-caption" id="fieldCaption">The field is waiting for your team.</div></div><div class="field-progress"><span id="fieldStepLabel">Step 0 of 3</span><div class="field-meter"><i id="fieldMeter"></i></div></div><div class="evidence-grid" id="evidenceGrid"></div><button class="primary" id="launchMission">Launch mission</button><p class="field-result" id="fieldResult" aria-live="polite"></p></section>
+  <section class="panel progress-panel"><div class="panel-heading"><div><p class="eyebrow">TEAM PROGRESS</p><h2>Season record</h2></div><span class="badge" id="seasonTitle">First Paws</span></div><div class="progress-grid"><div><strong id="ribbonCount">0</strong><span>ribbons</span></div><div><strong id="eventCount">0</strong><span>events completed</span></div><div><strong id="bestScore">0</strong><span>best score</span></div></div><p class="care-note" id="progressNote">Complete a safe event to earn your first ribbon.</p></section>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
